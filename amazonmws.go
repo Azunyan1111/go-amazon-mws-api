@@ -8,7 +8,7 @@ import (
 /*
 GetLowestOfferListingsForASIN takes a list of ASINs and returns the result.
 */
-func (api AmazonMWSAPI) GetLowestOfferListingsForASIN(items []string) (string, error) {
+func (api AmazonMWSAPI) GetLowestOfferListingsForASIN(items []string, itemCondition string) (string, error) {
 	params := make(map[string]string)
 
 	for k, v := range items {
@@ -17,6 +17,7 @@ func (api AmazonMWSAPI) GetLowestOfferListingsForASIN(items []string) (string, e
 	}
 
 	params["MarketplaceId"] = string(api.MarketplaceId)
+	params["ItemCondition"] = itemCondition
 
 	return api.genSignAndFetch("GetLowestOfferListingsForASIN", "/Products/2011-10-01", params)
 }
